@@ -1,0 +1,72 @@
+[
+  {
+    "Time_Log_ID":1,
+    "Employee_ID":7,
+    "Clock_In":"2025-10-23 17:00:00",
+    "Clock_Out":"2025-10-23 21:00:00",
+    "Actual_Hours":4.0
+  },
+  {
+    "Time_Log_ID":2,
+    "Employee_ID":5,
+    "Clock_In":"2025-10-29 15:00:00",
+    "Clock_Out":"2025-10-29 23:00:00",
+    "Actual_Hours":8.0
+  },
+  {
+    "Time_Log_ID":3,
+    "Employee_ID":2,
+    "Clock_In":"2025-11-03 16:00:00",
+    "Clock_Out":"2025-11-04 00:00:00",
+    "Actual_Hours":8.0
+  },
+  {
+    "Time_Log_ID":4,
+    "Employee_ID":9,
+    "Clock_In":"2025-10-30 15:00:00",
+    "Clock_Out":"2025-10-30 19:00:00",
+    "Actual_Hours":4.0
+  },
+  {
+    "Time_Log_ID":5,
+    "Employee_ID":6,
+    "Clock_In":"2025-11-02 15:00:00",
+    "Clock_Out":"2025-11-02 23:00:00",
+    "Actual_Hours":8.0
+  },
+  {
+    "Time_Log_ID":6,
+    "Employee_ID":9,
+    "Clock_In":"2025-11-04 14:00:00",
+    "Clock_Out":"2025-11-04 22:00:00",
+    "Actual_Hours":8.0
+  },
+  {
+    "Time_Log_ID":7,
+    "Employee_ID":6,
+    "Clock_In":"2025-10-28 14:00:00",
+    "Clock_Out":"2025-10-28 18:00:00",
+    "Actual_Hours":4.0
+  },
+  {
+    "Time_Log_ID":8,
+    "Employee_ID":6,
+    "Clock_In":"2025-11-04 16:00:00",
+    "Clock_Out":"2025-11-04 20:00:00",
+    "Actual_Hours":4.0
+  },
+  {
+    "Time_Log_ID":9,
+    "Employee_ID":1,
+    "Clock_In":"2025-10-24 18:00:00",
+    "Clock_Out":"2025-10-24 22:00:00",
+    "Actual_Hours":4.0
+  },
+  {
+    "Time_Log_ID":10,
+    "Employee_ID":2,
+    "Clock_In":"2025-11-01 17:00:00",
+    "Clock_Out":"2025-11-01 21:00:00",
+    "Actual_Hours":4.0
+  }
+]

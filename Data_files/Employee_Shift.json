@@ -1,0 +1,92 @@
+[
+  {
+    "Employee_ShiftID":1,
+    "Employee_ID":4,
+    "Shift_ID":1,
+    "Signup_Timestamp":"2025-10-23 01:00:00",
+    "Approved_By":"Manager A",
+    "Approval":true,
+    "Scheduled_Hours":7.29
+  },
+  {
+    "Employee_ShiftID":2,
+    "Employee_ID":6,
+    "Shift_ID":2,
+    "Signup_Timestamp":"2025-10-24 11:00:00",
+    "Approved_By":"Manager B",
+    "Approval":true,
+    "Scheduled_Hours":4.84
+  },
+  {
+    "Employee_ShiftID":3,
+    "Employee_ID":10,
+    "Shift_ID":3,
+    "Signup_Timestamp":"2025-10-25 00:00:00",
+    "Approved_By":"Manager A",
+    "Approval":false,
+    "Scheduled_Hours":5.58
+  },
+  {
+    "Employee_ShiftID":4,
+    "Employee_ID":8,
+    "Shift_ID":4,
+    "Signup_Timestamp":"2025-10-25 02:00:00",
+    "Approved_By":"Manager B",
+    "Approval":true,
+    "Scheduled_Hours":4.99
+  },
+  {
+    "Employee_ShiftID":5,
+    "Employee_ID":9,
+    "Shift_ID":5,
+    "Signup_Timestamp":"2025-10-28 04:00:00",
+    "Approved_By":"Manager B",
+    "Approval":false,
+    "Scheduled_Hours":7.59
+  },
+  {
+    "Employee_ShiftID":6,
+    "Employee_ID":7,
+    "Shift_ID":6,
+    "Signup_Timestamp":"2025-10-28 06:00:00",
+    "Approved_By":"Manager A",
+    "Approval":true,
+    "Scheduled_Hours":6.04
+  },
+  {
+    "Employee_ShiftID":7,
+    "Employee_ID":2,
+    "Shift_ID":7,
+    "Signup_Timestamp":"2025-10-27 14:00:00",
+    "Approved_By":"Manager A",
+    "Approval":true,
+    "Scheduled_Hours":6.51
+  },
+  {
+    "Employee_ShiftID":8,
+    "Employee_ID":7,
+    "Shift_ID":8,
+    "Signup_Timestamp":"2025-10-28 16:00:00",
+    "Approved_By":"Manager B",
+    "Approval":false,
+    "Scheduled_Hours":6.38
+  },
+  {
+    "Employee_ShiftID":9,
+    "Employee_ID":8,
+    "Shift_ID":9,
+    "Signup_Timestamp":"2025-11-01 03:00:00",
+    "Approved_By":"Manager B",
+    "Approval":true,
+    "Scheduled_Hours":6.72
+  },
+  {
+    "Employee_ShiftID":10,
+    "Employee_ID":2,
+    "Shift_ID":10,
+    "Signup_Timestamp":"2025-11-02 04:00:00",
+    "Approved_By":"Manager B",
+    "Approval":false,
+    "Scheduled_Hours":4.45
+  }
+]

@@ -1,0 +1,102 @@
+[
+  {
+    "Shift_ID":1,
+    "Shift_Date":"2025-10-21",
+    "Start_Time":"08:00",
+    "End_Time":"16:00",
+    "Min_Hours":3.0,
+    "Max_Hours":8.0,
+    "Location":"Headquarters",
+    "Required_Role":"Technician"
+  },
+  {
+    "Shift_ID":2,
+    "Shift_Date":"2025-10-22",
+    "Start_Time":"08:00",
+    "End_Time":"14:00",
+    "Min_Hours":3.0,
+    "Max_Hours":6.0,
+    "Location":"Warehouse A",
+    "Required_Role":"Technician"
+  },
+  {
+    "Shift_ID":3,
+    "Shift_Date":"2025-10-23",
+    "Start_Time":"12:00",
+    "End_Time":"20:00",
+    "Min_Hours":3.0,
+    "Max_Hours":8.0,
+    "Location":"Remote Site",
+    "Required_Role":"Packer"
+  },
+  {
+    "Shift_ID":4,
+    "Shift_Date":"2025-10-24",
+    "Start_Time":"10:00",
+    "End_Time":"18:00",
+    "Min_Hours":3.0,
+    "Max_Hours":8.0,
+    "Location":"Warehouse A",
+    "Required_Role":"Cashier"
+  },
+  {
+    "Shift_ID":5,
+    "Shift_Date":"2025-10-25",
+    "Start_Time":"10:00",
+    "End_Time":"16:00",
+    "Min_Hours":3.0,
+    "Max_Hours":6.0,
+    "Location":"Warehouse A",
+    "Required_Role":"Picker"
+  },
+  {
+    "Shift_ID":6,
+    "Shift_Date":"2025-10-26",
+    "Start_Time":"08:00",
+    "End_Time":"14:00",
+    "Min_Hours":3.0,
+    "Max_Hours":6.0,
+    "Location":"Outlet 4",
+    "Required_Role":"Supervisor"
+  },
+  {
+    "Shift_ID":7,
+    "Shift_Date":"2025-10-27",
+    "Start_Time":"12:00",
+    "End_Time":"16:00",
+    "Min_Hours":3.0,
+    "Max_Hours":4.0,
+    "Location":"Outlet 4",
+    "Required_Role":"Packer"
+  },
+  {
+    "Shift_ID":8,
+    "Shift_Date":"2025-10-28",
+    "Start_Time":"10:00",
+    "End_Time":"18:00",
+    "Min_Hours":3.0,
+    "Max_Hours":8.0,
+    "Location":"Outlet 4",
+    "Required_Role":"Cashier"
+  },
+  {
+    "Shift_ID":9,
+    "Shift_Date":"2025-10-29",
+    "Start_Time":"10:00",
+    "End_Time":"18:00",
+    "Min_Hours":3.0,
+    "Max_Hours":8.0,
+    "Location":"Store 12",
+    "Required_Role":"Picker"
+  },
+  {
+    "Shift_ID":10,
+    "Shift_Date":"2025-10-30",
+    "Start_Time":"14:00",
+    "End_Time":"20:00",
+    "Min_Hours":3.0,
+    "Max_Hours":6.0,
+    "Location":"Outlet 4",
+    "Required_Role":"Technician"
+  }
+]
