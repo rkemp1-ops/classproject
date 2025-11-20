@@ -1,0 +1,155 @@
+
+import csv
+import os
+
+# File names
+EMPLOYEE_FILE = "employee.csv"
+SHIFT_FILE = "shift.csv"
+TIMELOG_FILE = "TimeLogs.csv"
+
+# Ensure CSV files exist with headers
+if not os.path.exists(EMPLOYEE_FILE):
+    with open(EMPLOYEE_FILE, "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["Employee_ID", "First_Name", "Last_Name", "Hourly_Rate"])
+
+if not os.path.exists(SHIFT_FILE):
+    with open(SHIFT_FILE, "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["Shift_ID", "Employee_ID", "Shift_Date", "Start_Time", "End_Time", "Min_Hours"])
+
+if not os.path.exists(TIMELOG_FILE):
+    with open(TIMELOG_FILE, "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["Employee_ID", "Shift_ID", "Clock_In", "Clock_Out", "Actual_Hours", "Total_Hours"])
+
+# Data storage
+employees = {}
+shifts = {}
+time_logs = []
+
+def append_to_csv(file_name, row):
+    """Append a row to the specified CSV file."""
+    with open(file_name, "a", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(row)
+
+def add_employee():
+    print("\n--- Add Employee ---")
+    emp_id = input("Enter Employee ID: ")
+    first_name = input("Enter First Name: ")
+    last_name = input("Enter Last Name: ")
+    hourly_rate = float(input("Enter Hourly Rate: "))
+
+    employees[emp_id] = {
+        "First_Name": first_name,
+        "Last_Name": last_name,
+        "Hourly_Rate": hourly_rate
+    }
+
+    append_to_csv(EMPLOYEE_FILE, [emp_id, first_name, last_name, hourly_rate])
+    print(f"Employee {emp_id} added and saved to {EMPLOYEE_FILE}!")
+
+def add_shift():
+    print("\n--- Add Shift ---")
+    shift_id = input("Enter Shift ID: ")
+    emp_id = input("Enter Employee ID (must exist): ")
+
+    if emp_id not in employees:
+        print("Error: Employee ID does not exist!")
+        return
+
+    shift_date = input("Enter Shift Date (YYYY-MM-DD): ")
+    start_time = input("Enter Start Time (HH:MM): ")
+    end_time = input("Enter End Time (HH:MM): ")
+    min_hours = float(input("Enter Minimum Hours: "))
+
+    if min_hours < 6:
+        print("Error: Minimum hours must be at least 6!")
+        return
+
+    shifts[shift_id] = {
+        "Employee_ID": emp_id,
+        "Shift_Date": shift_date,
+        "Start_Time": start_time,
+        "End_Time": end_time,
+        "Min_Hours": min_hours
+    }
+
+    append_to_csv(SHIFT_FILE, [shift_id, emp_id, shift_date, start_time, end_time, min_hours])
+    print(f"Shift {shift_id} added and saved to {SHIFT_FILE}!")
+
+def add_time_log():
+    print("\n--- Add Time Log ---")
+    emp_id = input("Enter Employee ID: ")
+    shift_id = input("Enter Shift ID: ")
+
+    if emp_id not in employees or shift_id not in shifts:
+        print("Error: Employee or Shift does not exist!")
+        return
+
+    clock_in = input("Enter Clock In Time (HH:MM): ")
+    clock_out = input("Enter Clock Out Time (HH:MM): ")
+    actual_hours = float(input("Enter Actual Hours: "))
+    total_hours = float(input("Enter Total Hours: "))
+
+    time_logs.append({
+        "Employee_ID": emp_id,
+        "Shift_ID": shift_id,
+        "Clock_In": clock_in,
+        "Clock_Out": clock_out,
+        "Actual_Hours": actual_hours,
+        "Total_Hours": total_hours
+    })
+
+    append_to_csv(TIMELOG_FILE, [emp_id, shift_id, clock_in, clock_out, actual_hours, total_hours])
+
+    # Validate total hours for employee
+    emp_total = sum(log["Total_Hours"] for log in time_logs if log["Employee_ID"] == emp_id)
+    if emp_total < 36:
+        print(f"Warning: Employee {emp_id} has only {emp_total} total hours (must be >= 36).")
+    else:
+        print(f"Employee {emp_id} meets the 36-hour requirement.")
+
+    print("Time Log added and saved to TimeLogs.csv!")
+
+def display_data():
+    print("\n--- Employees ---")
+    for emp_id, data in employees.items():
+        print(emp_id, data)
+
+    print("\n--- Shifts ---")
+    for shift_id, data in shifts.items():
+        print(shift_id, data)
+
+    print("\n--- Time Logs ---")
+    for log in time_logs:
+        print(log)
+
+def main():
+    while True:
+        print("\nMenu:")
+        print("1. Add Employee")
+        print("2. Add Shift")
+        print("3. Add Time Log")
+        print("4. Display All Data")
+        print("5. Exit")
+
+        choice = input("Enter choice: ")
+
+        if choice == '1':
+            add_employee()
+        elif choice == '2':
+            add_shift()
+        elif choice == '3':
+            add_time_log()
+        elif choice == '4':
+            display_data()
+        elif choice == '5':
+            print("Exiting...")
+            break
+        else:
+            print("Invalid choice! Try again.")
+
+if __name__ == "__main__":
+    main()
