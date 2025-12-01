@@ -1,0 +1,177 @@
+import csv
+import os
+from datetime import datetime
+
+# File names
+EMPLOYEE_FILE = "employee.csv"
+SHIFT_FILE = "shift.csv"
+TIMELOG_FILE = "TimeLogs.csv"
+
+# Ensure CSV files exist with headers
+if not os.path.exists(EMPLOYEE_FILE):
+    with open(EMPLOYEE_FILE, "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["Employee_ID", "First_Name", "Last_Name", "Hourly_Rate"])
+
+if not os.path.exists(SHIFT_FILE):
+    with open(SHIFT_FILE, "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["Shift_ID", "Employee_ID", "Shift_Date", "Start_Time", "End_Time", "Min_Hours"])
+
+if not os.path.exists(TIMELOG_FILE):
+    with open(TIMELOG_FILE, "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["Employee_ID", "Shift_ID", "Clock_In", "Clock_Out", "Actual_Hours", "Total_Hours"])
+
+# Data storage
+employees = {}
+shifts = {}
+time_logs = []
+
+def append_to_csv(file_name, row):
+    """Append a row to the specified CSV file."""
+    with open(file_name, "a", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(row)
+
+# ------------------ NEW HELPER FUNCTIONS ------------------
+
+def calculate_hours(start, end):
+    """Calculate hours from HH:MM to HH:MM time strings."""
+    fmt = "%H:%M"
+    start_dt = datetime.strptime(start, fmt)
+    end_dt = datetime.strptime(end, fmt)
+    return (end_dt - start_dt).seconds / 3600
+
+def get_employee_total_hours(emp_id):
+    """Return total logged hours for an employee."""
+    total = 0
+    for log in time_logs:
+        if log["Employee_ID"] == emp_id:
+            total += float(log["Actual_Hours"])
+    return total
+
+def auto_add_time_log(emp_id, shift_id, start, end):
+    """Automatically create a time log entry when a shift is added."""
+    hours = calculate_hours(start, end)
+    previous_total = get_employee_total_hours(emp_id)
+    new_total = previous_total + hours
+
+    log_entry = {
+        "Employee_ID": emp_id,
+        "Shift_ID": shift_id,
+        "Clock_In": start,
+        "Clock_Out": end,
+        "Actual_Hours": hours,
+        "Total_Hours": new_total
+    }
+
+    time_logs.append(log_entry)
+
+    append_to_csv(TIMELOG_FILE, [
+        emp_id, shift_id, start, end, hours, new_total
+    ])
+
+    # Check weekly hours rule
+    if new_total < 36:
+        print(f"Warning: Employee {emp_id} has only {new_total} hours (must be >= 36).")
+    else:
+        print(f"Employee {emp_id} meets the 36-hour requirement.")
+
+# ----------------------------------------------------------
+
+def add_employee():
+    print("\n--- Add Employee ---")
+    emp_id = input("Enter Employee ID: ")
+    first_name = input("Enter First Name: ")
+    last_name = input("Enter Last Name: ")
+    hourly_rate = float(input("Enter Hourly Rate: "))
+
+    employees[emp_id] = {
+        "First_Name": first_name,
+        "Last_Name": last_name,
+        "Hourly_Rate": hourly_rate
+    }
+
+    append_to_csv(EMPLOYEE_FILE, [emp_id, first_name, last_name, hourly_rate])
+    print(f"Employee {emp_id} added and saved to {EMPLOYEE_FILE}!")
+
+def add_shift():
+    print("\n--- Add Shift ---")
+    shift_id = input("Enter Shift ID: ")
+    emp_id = input("Enter Employee ID (must exist): ")
+
+    if emp_id not in employees:
+        print("Error: Employee ID does not exist!")
+        return
+
+    shift_date = input("Enter Shift Date (YYYY-MM-DD): ")
+    start_time = input("Enter Start Time (HH:MM): ")
+    end_time = input("Enter End Time (HH:MM): ")
+    min_hours = float(input("Enter Minimum Hours: "))
+
+    # Validate minimum shift hours
+    calculated_hours = calculate_hours(start_time, end_time)
+    if calculated_hours < 6:
+        print("Error: Shift must be at least 6 hours!")
+        return
+
+    shifts[shift_id] = {
+        "Employee_ID": emp_id,
+        "Shift_Date": shift_date,
+        "Start_Time": start_time,
+        "End_Time": end_time,
+        "Min_Hours": min_hours
+    }
+
+    append_to_csv(SHIFT_FILE, [shift_id, emp_id, shift_date, start_time, end_time, min_hours])
+    print(f"Shift {shift_id} added and saved to {SHIFT_FILE}!")
+
+    # -------- AUTO ADD TIME LOG HERE --------
+    auto_add_time_log(emp_id, shift_id, start_time, end_time)
+    print(f"Time log automatically created for Shift {shift_id}.")
+
+def add_time_log():
+    print("\n--- Manual Add Time Log (Optional) ---")
+    print("Note: Time logs are now auto-created upon shift signup.")
+
+def display_data():
+    print("\n--- Employees ---")
+    for emp_id, data in employees.items():
+        print(emp_id, data)
+
+    print("\n--- Shifts ---")
+    for shift_id, data in shifts.items():
+        print(shift_id, data)
+
+    print("\n--- Time Logs ---")
+    for log in time_logs:
+        print(log)
+
+def main():
+    while True:
+        print("\nMenu:")
+        print("1. Add Employee")
+        print("2. Add Shift (Automatically Logs Hours)")
+        print("3. Add Time Log (Manual)")
+        print("4. Display All Data")
+        print("5. Exit")
+
+        choice = input("Enter choice: ")
+
+        if choice == '1':
+            add_employee()
+        elif choice == '2':
+            add_shift()
+        elif choice == '3':
+            add_time_log()
+        elif choice == '4':
+            display_data()
+        elif choice == '5':
+            print("Exiting...")
+            break
+        else:
+            print("Invalid choice! Try again.")
+
+if __name__ == "__main__":
+    main()
